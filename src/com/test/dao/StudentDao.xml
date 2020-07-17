@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	Mapper代理开发的规范 
+	1. Mapper接口的名称和对应的Mapper.xml 映射文件的名称必须一致
+	2. Mapper.xml文件的namespace与Mapper接口的类路径相同（即接口文件和映射文件放在统一文件夹）
+	3. Mapper接口的方法名和Mapper.xml中定于的每个执行语句的id相同
+	4. Mapper接口中方法的输入参数类型和Mapper.xml中定义的每个sql的parameterType类型相同
+	5. Mapper接口方法的输出类型和Mapper.xml中定义的每个sql的resultType的类型相同
+ -->
+ 
+<mapper namespace="com.test.dao.StudentDao">
+	
+	<!-- 根据学号查找学生信息 -->
+	<select id="findStudentBysnoStu" parameterType="String" resultType="Student">
+		select * from  stuinfo where sno=#{sno}
+	</select>
+	
+	<!-- 更改学生登录密码 -->
+	<update id="updateStuPwd" parameterType="Student">
+		update stuinfo set pwd = #{pwd}
+		where sno= #{sno}		
+	</update>
+</mapper>

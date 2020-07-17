@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	Mapper代理开发的规范 
+	1. Mapper接口的名称和对应的Mapper.xml 映射文件的名称必须一致
+	2. Mapper.xml文件的namespace与Mapper接口的类路径相同（即接口文件和映射文件放在统一文件夹）
+	3. Mapper接口的方法名和Mapper.xml中定于的每个执行语句的id相同
+	4. Mapper接口中方法的输入参数类型和Mapper.xml中定义的每个sql的parameterType类型相同
+	5. Mapper接口方法的输出类型和Mapper.xml中定义的每个sql的resultType的类型相同
+ -->
+ 
+<mapper namespace="com.test.dao.TeacherDao">
+	
+	<!-- 根据职工号 更新教师信息(密码) -->
+	<update id="updateTeacher" parameterType="Teacher">
+		update teainfo set pwd=#{pwd} where tno=#{tno}
+	</update> 
+	
+	<!-- 查询所有学生的信息 -->
+	<select id="findAllStudnet" resultType="Student">
+		select * from stuinfo
+	</select>
+	<!--  根据学号 查询学生信息-->
+	<select id="findStudentBysnoTea" parameterType="String" resultType="Student">
+		select * from stuinfo where sno=#{sno}
+	</select>
+	<!-- 修改学生成绩信息 （×）-->
+	<update id="updateStudent" parameterType="Student">
+		update stuinfo set score=#{score} where sno=#{sno} 
+	</update>
+	<!--  删除学生信息-->
+	<delete id="deleteStudent" parameterType="String">
+		delete from stuinfo where sno= #{sno}
+	</delete>
+	<!-- 新增学生 -->
+	<insert id="insertStudent" parameterType="Student">
+		insert into stuinfo (sno,ssex,sname,pwd,score) values 
+		(#{sno},#{ssex},#{sname},#{pwd},#{score})
+		
+	</insert>
+</mapper>
